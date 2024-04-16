@@ -5,12 +5,16 @@ services:
     container_name: nestjs-ocr-server
     build:
       context: .
+      target: ${NODE_ENV}
       args:
         NODE_VERSION: ${NODE_VERSION}
-    environment:
-      NODE_ENV: ${NODE_ENV}
     ports:
       - 3000:3000
+    volumes:
+      - ./src:/usr/src/api/src
+    depends_on:
+      - db
+
   db:
     container_name: nestjs-ocr-db
     image: postgres:16
