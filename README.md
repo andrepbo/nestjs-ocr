@@ -44,7 +44,14 @@ $ npm run test:cov
 ## Docker
 
 ```bash
+# server and database detached mode
 $ docker compose up -d
+
+# database detached mode
+$ docker compose up -d db
+
+# server watch mode
+$ docker compose up server
 ```
 
 Your application will be available at http://localhost:3000.
