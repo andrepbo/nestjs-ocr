@@ -1,6 +1,6 @@
-import { User } from 'src/users/entities/user.entity';
 import { DataSource } from 'typeorm';
 import { DATA_SOURCE } from './constants/database.constants';
+import { User } from 'src/users/entities/user.entity';
 
 export const databaseProviders = [
   {
