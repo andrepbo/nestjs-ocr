@@ -3,7 +3,7 @@ services:
     container_name: nestjs-ocr-server
     build:
       context: .
-      target: ${NODE_ENV}
+      target: dev
       args:
         NODE_VERSION: ${NODE_VERSION}
     ports:
