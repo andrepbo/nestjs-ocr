@@ -2,6 +2,10 @@
 
 NestJS OCR (Optical Character Recognition) is a powerful application that utilizes the NestJS framework to provide OCR functionality. With this app, you can easily extract text from PDFs, making it ideal for tasks like document processing and data extraction.
 
+## Prerequisites
+- [Docker](https://www.docker.com)
+- [NestJS](https://nestjs.com)
+
 ## Installation
 
 ```bash
