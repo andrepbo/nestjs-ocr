@@ -13,48 +13,28 @@ $ cd nestjs-ocr
 
 # install dependencies
 $ npm install
+
+# database and dev server watch mode
+$ npm run docker-compose:dev
+
+# database and prod server watch mode
+$ npm run docker-compose:prod
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
+Your application will be available at http://localhost:3000.
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ npm run docker-compose:test
 
-# e2e tests
-$ npm run test:e2e
+# unit tests watch mode
+$ npm run docker-compose:test:watch
 
 # test coverage
-$ npm run test:cov
+$ npm run docker-compose:test:cov
 ```
-
-## Docker
-
-```bash
-# server and database detached mode
-$ docker compose up -d
-
-# database detached mode
-$ docker compose up -d db
-
-# server watch mode
-$ docker compose up server
-```
-
-Your application will be available at http://localhost:3000.
 
 ## Stay in touch
 
