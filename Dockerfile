@@ -11,6 +11,9 @@ RUN npm ci
 COPY . .
 CMD [ "npm", "run", "start:dev" ]
 
+FROM dev AS dev-debug
+CMD [ "npm", "run", "start:debug" ]
+
 FROM dev AS test
 ENV NODE_ENV=test
 CMD [ "npm", "run", "test" ]
