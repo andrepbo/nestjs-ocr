@@ -1,5 +1,6 @@
 import { EntitySchema } from "typeorm";
 import { User } from "../entities/user.entity";
+import { UserRole } from "../constants/user.constants";
 
 export const UserSchema = new EntitySchema<User>({
   name: "User",
@@ -22,17 +23,19 @@ export const UserSchema = new EntitySchema<User>({
     },
     role: {
       type: "enum",
-      enum: ["admin", "guest"],
-      default: "guest",
+      enum: UserRole,
+      default: UserRole.GUEST
     },
     createdAt: {
-      type: "timestamp",
+      type: Date,
+      createDate: true,
     },
     updatedAt: {
-      type: "timestamp",
+      type: Date,
+      updateDate: true,
     },
     deletedAt: {
-      type: "timestamp",
+      type: Date,
       nullable: true,
     },
   },

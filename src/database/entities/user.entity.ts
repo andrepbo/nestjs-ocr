@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { UserRole } from '../constants/user.constants';
 
 @Entity()
 export class User {
@@ -14,7 +15,7 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
-  @Column({ type: 'enum', enum: ['admin', 'guest'], default: 'guest' })
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.GUEST })
   role: string;
 
   @CreateDateColumn()
