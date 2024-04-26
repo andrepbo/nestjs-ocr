@@ -28,7 +28,9 @@ export class UsersService {
     return await this.userRepository.update(id, updateUser);
   }
 
-  async remove(id: string) {
-    return await this.userRepository.delete(id);
+  async softDelete(id: string) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) throw new NotFoundException('User not found');
+    return await this.userRepository.softDelete(id);
   }
 }
