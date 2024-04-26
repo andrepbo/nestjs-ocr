@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 import { NotFoundException } from '@nestjs/common';
 
 describe('UsersService', () => {
-  let service: UsersService;
+  let usersService: UsersService;
   let repo: Repository<User>;
   const user: User = {
     id: '1',
@@ -29,21 +29,52 @@ describe('UsersService', () => {
       ],
     }).compile();
 
-    service = module.get<UsersService>(UsersService);
+    usersService = module.get<UsersService>(UsersService);
     repo = module.get<Repository<User>>(getRepositoryToken(User));
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(usersService).toBeDefined();
   });
 
-  it('findOne method should return a user', async () => {
-    jest.spyOn(repo, 'findOne').mockResolvedValueOnce(user);
-    expect(await service.findOne(user.id)).toEqual(user);
+  describe('create method', () => {
+    it('should create a user', async () => {
+      jest.spyOn(usersService, 'create').mockResolvedValueOnce(user);
+      expect(await usersService.create(user)).toEqual(user);
+    });
   });
 
-  it('findOne should throw BadRequestException if user not found', async () => {
-    jest.spyOn(repo, 'findOne').mockResolvedValueOnce(null);
-    await expect(service.findOne('nonexistentId')).rejects.toThrow(NotFoundException);
+  describe('findAll method', () => {
+    it('should return an array of users', async () => {
+      const result = [user];
+      jest.spyOn(usersService, 'findAll').mockResolvedValueOnce(result);
+      expect(await usersService.findAll()).toBe(result);
+    });
+  });
+
+  describe('findOne method', () => {
+    it('should return a user', async () => {
+      jest.spyOn(usersService, 'findOne').mockResolvedValueOnce(user);
+      expect(await usersService.findOne(user.id)).toEqual(user);
+    });
+
+    it('should throw an error if user not found', async () => {
+      jest.spyOn(repo, 'findOne').mockResolvedValueOnce(null);
+      await expect(usersService.findOne('usernotfound')).rejects.toThrow(NotFoundException);
+    });
+  });
+
+  describe('update method', () => {
+    it('should update a user', async () => {
+      jest.spyOn(usersService, 'update').mockResolvedValueOnce({ generatedMaps: [], raw: [], affected: 1 });
+      expect(await usersService.update(user.id, user)).toEqual({ generatedMaps: [], raw: [], affected: 1 });
+    });
+  });
+
+  describe('softDelete method', () => {
+    it('should update updatedAt and deletedAt fields', async () => {
+      jest.spyOn(usersService, 'softDelete').mockResolvedValueOnce({ generatedMaps: [], raw: [], affected: 1 });
+      expect(await usersService.softDelete(user.id)).toEqual({ generatedMaps: [], raw: [], affected: 1 });
+    });
   });
 });
