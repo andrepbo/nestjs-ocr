@@ -11,6 +11,8 @@ export class UsersService {
   ) { }
 
   async create(user: User) {
+    const email = await this.userRepository.findOne({ where: { email: user.email } });
+    if (email) throw new NotFoundException('Email already exists');
     return await this.userRepository.save(user);
   }
 

@@ -17,6 +17,10 @@ export const UserSchema = new EntitySchema<User>({
     lastName: {
       type: String,
     },
+    email: {
+      type: String,
+      unique: true,
+    },
     isActive: {
       type: Boolean,
       default: true,
